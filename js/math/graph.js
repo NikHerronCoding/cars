@@ -4,6 +4,30 @@ class Graph {
         this.segments = segments;
     }
 
+    static load(object) {
+        const segments = []
+        const points = []
+
+        for (const point of object.points) {
+            points.push(new Point(point.x, point.y))
+        }
+
+        for (const segment of object.segments) {
+            segments.push(new Segment(
+                points.find((p)=>p.equals(segment.p1)),
+                points.find((p)=>p.equals(segment.p2))
+                ));
+        }
+
+
+        const output = new Graph(points, segments);
+        return output;
+    }
+
+    hash() {
+        return JSON.stringify(graph);
+    }
+
     addPoint(point){
          this.points.push(point);
 
